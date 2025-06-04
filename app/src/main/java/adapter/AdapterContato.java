@@ -25,6 +25,12 @@ public class AdapterContato extends RecyclerView.Adapter<AdapterContato.MyViewHo
         void onItemLongClick(Contato contato, int position);
     }
 
+    private OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.onItemClickListener =  listener;
+    }
+
     public AdapterContato(List<Contato> listaContatos) {
         this.listaContatos = listaContatos;
     }
@@ -41,6 +47,18 @@ public class AdapterContato extends RecyclerView.Adapter<AdapterContato.MyViewHo
         Contato contato = listaContatos.get(position);
         holder.nomeContato.setText(contato.getNomeContato());
         holder.telContato.setText(contato.getTelContato());
+        //Configurar os listeners de clique
+        holder.itemView.setOnClickListener(v -> {
+            if(onItemClickListener!=null){
+                onItemClickListener.onItemClick(contato, position);
+            }
+        });
+        holder.itemView.setOnLongClickListener(v -> {
+            if(onItemClickListener!=null){
+                onItemClickListener.onItemLongClick(contato, position);
+            }
+            return true;
+        });
     }
 
     @Override
