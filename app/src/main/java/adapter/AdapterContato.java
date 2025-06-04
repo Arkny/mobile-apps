@@ -19,6 +19,12 @@ public class AdapterContato extends RecyclerView.Adapter<AdapterContato.MyViewHo
     private List<Contato> listaContatos;
     private Context context;
 
+    //Definição da Interface para o click do recyclerView
+    public interface OnItemClickListener{
+        void onItemClick(Contato contato, int position);
+        void onItemLongClick(Contato contato, int position);
+    }
+
     public AdapterContato(List<Contato> listaContatos) {
         this.listaContatos = listaContatos;
     }
